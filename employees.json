@@ -1,6 +1,0 @@
-[
-  { "id": "EMP001", "access_level": 2, "request_time": "09:15", "room": "ServerRoom" },
-  { "id": "EMP002", "access_level": 1, "request_time": "09:30", "room": "Vault" },
-  { "id": "EMP003", "access_level": 3, "request_time": "10:05", "room": "ServerRoom" },
-  { "id": "EMP004", "access_level": 3, "request_time": "09:45", "room": "Vault" }
-]
