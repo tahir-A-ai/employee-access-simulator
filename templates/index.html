@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Access Simulator</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Employee Access Simulator</h1>
+    </header>
+
+    <main>
+        <h2>Employee Requests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Access Level</th>
+                    <th>Request Time</th>
+                    <th>Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.id }}</td>
+                    <td>{{ emp.access_level }}</td>
+                    <td>{{ emp.request_time }}</td>
+                    <td>{{ emp.room }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button onclick="simulate()">Simulate Access</button>
+
+        <h2 class="results-title" id="results-title" style="display:none;">Simulation Results</h2>
+        <div id="results" style="display:none;"></div>
+
+    </main>
+
+    <script>
+   function simulate() {
+    fetch("/simulate", {method: "POST"})
+        .then(res => res.json())
+        .then(data => {
+            let out = "<table><thead><tr><th>ID</th><th>Room</th><th>Result</th></tr></thead><tbody>";
+            data.forEach(emp => {
+                let statusClass = emp.result.startsWith("Granted") ? "granted" : "denied";
+                out += `<tr>
+                            <td>${emp.id}</td>
+                            <td>${emp.room}</td>
+                            <td class="${statusClass}">${emp.result}</td>
+                        </tr>`;
+            });
+            out += "</tbody></table>";
+
+            document.getElementById("results").innerHTML = out;
+            document.getElementById("results").style.display = "block";
+            document.getElementById("results-title").style.display = "block";
+        });
+}
+    </script>
+</body>
+</html>
