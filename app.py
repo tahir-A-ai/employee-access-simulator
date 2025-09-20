@@ -1,8 +1,9 @@
+# importing neccesary libraries
 from flask import Flask, render_template, request, jsonify
 import json
 from rules import check_access
 
-app = Flask(__name__)
+app=Flask(__name__)
 
 @app.route("/")
 def index():
