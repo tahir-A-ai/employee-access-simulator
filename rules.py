@@ -1,3 +1,4 @@
+# imports
 from datetime import datetime, timedelta
 
 # Room rules
@@ -10,11 +11,14 @@ ROOMS = {
 # Track last access times
 last_access = {}
 
+# Check access function
 def check_access(emp):
     room = ROOMS[emp["room"]]
     emp_time = datetime.strptime(emp["request_time"], "%H:%M")
     open_time = datetime.strptime(room["open"], "%H:%M")
     close_time = datetime.strptime(room["close"], "%H:%M")
+
+    # Verifying all the three conditions
 
     # 1. Check access level
     if emp["access_level"] < room["min_level"]:
